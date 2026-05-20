@@ -6,14 +6,16 @@ Microservice built with **NestJS** that acts as an intelligent agent. It leverag
 
 The agent is designed to bridge the gap between Large Language Models and your core business logic. When a user asks a question that requires live data, the agent can decide to call specific functions to fetch that data from a **Spring Boot** backend.
 
-### Architecture
+## Architecture
+
+This diagram shows the interaction between the user, the NestJS agent, Google Gemini, and the Spring Boot API.
 
 ```mermaid
 graph TD
     User([User]) -->|Question| Nest[NestJS Agent]
     Nest -->|Prompt + Tools| Gemini[Google Gemini AI]
     Gemini -->|Function Call| Nest
-    Nest -->|GET /api/users/{id}| Spring[Spring Boot API]
+    Nest -->|"GET /api/users/{id}"| Spring[Spring Boot API]
     Spring -->|User Data| Nest
     Nest -->|Result| Gemini
     Gemini -->|Final Answer| Nest
